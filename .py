@@ -54,3 +54,26 @@ for v in vlist:
     print ("v",*v)
 for f in flist:
     print ("f",*f)
+
+    
+    
+    
+    
+    
+   
+def ore(dict1,objdict):
+	return all(objdict.get(i) in j.split("|") for i,j in dict1.items())
+def when(when,obj):
+	if isinstance(when.get("OR"),list):
+		return any(ore(i,obj) for i in when["OR"])
+	return ore(when,obj)
+def multipart(mult,obj):
+    for case in mult:
+        if ("when" not in case) or when(case["when"],obj):
+            if isinstance( case["apply"],list):
+                yield case["apply"][0]
+            else:
+                yield case["apply"]
+#multipart(j["multipart"],palettes[4]["Properties"])
+t="eggs=1,hatch=1"
+dict((j.strip() for j in i.split("=")) for i in t.split(","))
